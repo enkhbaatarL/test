@@ -1,0 +1,31 @@
+bases:
+  - ../../../deploy-config/base
+  - ../../../deploy-config/pattern/config/dev
+  - ../../../deploy-config/hpa/v2
+namePrefix: jaeger-demoapp-a-
+nameSuffix: -v0-dev
+commonLabels:
+  biz: jaeger-demoapp-a
+  app: jaeger-demoapp-a
+images:
+  - name: cloudsvcdev/microservice
+    newName: vup-registry.cloudzcp.io/modern/example/jaeger-demoapp-a
+    newTag: 0.0.1
+configMapGenerator:
+- name: app-config
+  files:
+    - application-overlay.yaml
+# 패치 대상 파일 목록
+patchesStrategicMerge:
+  - replicas-patch.yaml
+  - probe-patch.yaml
+  # - serviceport-patch.yaml
+  - spec-patch.yaml
+  - metric-patch.yaml
+  - hpa-v2-patch.yaml
+patchesJson6902:
+- target:
+    version: v1
+    kind: Service
+    name: app
+  path: service-patch.yaml

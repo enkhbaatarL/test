@@ -1,0 +1,17 @@
+spring:
+  application.name: jaeger-demoapp-a
+  jackson.serialization.indent_output: true
+
+info:
+  name: ${spring.application.name}
+  description: jeager pattern demo
+  version: 0.0.1
+
+## Log Pattern
+logging:
+    level:
+      root: info
+      com.skcc.modern.pattern.example.patternlabs01example.exception: debug
+      com.skcc.modern.pattern.example.patternlabs01example.service: info
+      com.skcc.modern.pattern.example.patternlabs01example.web: debug
+      com.skcc.modern: info

@@ -1,0 +1,13 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  # base와 동일하게 명시해서 patch시 어떤 deployment에 대한 수정인지 kustomize가 인식
+  name: app
+spec:
+  template:
+    metadata:
+      annotations:
+        # Metric
+        prometheus.io/scrape: 'true'
+        prometheus.io/path: '/actuator/prometheus'
+        prometheus.io/port: '8080'
